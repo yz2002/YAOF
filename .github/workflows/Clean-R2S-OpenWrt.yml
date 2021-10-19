@@ -1,4 +1,4 @@
-name: R2C-OpenWrt
+name: Clean-R2S-OpenWrt
 
 on:
 #  schedule:
@@ -70,7 +70,7 @@ jobs:
     - name: Make Config
       run: |
         cd openwrt
-        mv ../SEED/R2C/config.seed .config
+        mv ../SEED/R2S/clean_config.seed .config
         #echo -e 'CONFIG_DEVEL=y\nCONFIG_CCACHE=y' >> .config
         make defconfig
     - name: Get Architecture
@@ -116,9 +116,9 @@ jobs:
         gzip -d *.gz && exit 0
         gzip --best *.img
         ls -Ahl
-        sha256sum openwrt*r2c* | tee R2C-GC404-$(date +%Y-%m-%d)-21.02.sha256sum
-        zip R2C-GC404-$(date +%Y-%m-%d)-21.02-ext4.zip *r2c*ext4*
-        zip R2C-GC404-$(date +%Y-%m-%d)-21.02-sfs.zip *r2c*squashfs*
+        sha256sum openwrt*r2s* | tee R2S-GC404-$(date +%Y-%m-%d)-21.02.sha256sum
+        zip Clean-R2S-GC404-$(date +%Y-%m-%d)-21.02-ext4.zip *r2s*ext4*
+        zip Clean-R2S-GC404-$(date +%Y-%m-%d)-21.02-sfs.zip *r2s*squashfs*
         ls -Ahl
     - name: Upload artifact
       uses: actions/upload-artifact@main
